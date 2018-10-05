@@ -1,5 +1,5 @@
 import React from 'react'
-import Document from './index.mdx'
+import Document from './home.mdx'
 import { Button } from 'semantic-ui-react';
 
 const H1 = props => <h1 style={{ color: '#222' }} {...props} />
