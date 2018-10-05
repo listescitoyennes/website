@@ -42,60 +42,6 @@ nextApp.prepare().then(() => {
   });
 
   server.get('/api/data/:csvfile', api.getDataFromCSV);
-  server.get('/:zipcode/:firstname/:lastname', async (req, res, next) => {
-      const {
-        zipcode,
-        firstname,
-        lastname
-      } = req.params;
-      const csv = await api.getJSONFromCSVFile('candidats');
-      const data = csv.find(r =>
-        r['zipcode'] === zipcode
-          && r['lastname'].toLowerCase() === lastname.toLowerCase()
-          && r['firstname'].toLowerCase() === firstname.toLowerCase()
-      );
-      if (data) {
-        const cumuleoCSV = await api.getJSONFromCSVFile('cumuleo');
-        data.cumuleo = cumuleoCSV.find(r => r.firstname.toLowerCase() === firstname.toLowerCase() && r.lastname.toLowerCase() === lastname.toLowerCase() && r.zipcode === zipcode);
-      }
-      req.data = data;
-      next();
-  });
-
-  const inc = (obj, key, increment = 1) => {
-    obj[key] = obj[key] || 0;
-    obj[key] += increment;
-  }
-  server.get('/:zipcode', async (req, res, next) => {
-      const {
-        zipcode,
-        firstname,
-        lastname
-      } = req.params;
-      const csv = await api.getJSONFromCSVFile('candidats');
-      const filters = {
-        professions: {},
-        genders: {},
-        decades: {},
-      };
-      const results = csv.filter(r => {
-        let keep = false;
-        keep = req.query.gender && r.gender.toLowerCase() === req.query.gender.toLowerCase();
-        keep = (r.zipcode === zipcode);
-        if (keep) {
-          inc(filters.professions, r.profession);
-          inc(filters.genders, r.gender);
-          inc(filters.decades, Math.floor(parseInt(r.birthyear) / 10) * 10);  
-        }
-        return keep;
-      });
-      req.data = {
-        results,
-        total: results.total,
-        filters,
-      };
-      next();
-  });
 
   server.use('/static', (req, res, next) => {
     res.setHeader('Cache-Control', 'public, max-age=3600');

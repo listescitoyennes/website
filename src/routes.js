@@ -4,10 +4,8 @@ const routes = nextRoutes();
 
 routes
   .add('faq')
-  .add('contributing')
+  .add('contribuer')
   .add('index', '/')
-  .add('city', '/:zipcode')
-  .add('profile', '/:zipcode/:firstname/:lastname');
 
 export default routes;
 
