@@ -1,0 +1,18 @@
+{
+  "type": "npm",
+  "alias": [
+    "listescitoyennes",
+    "listescitoyennes.be",
+    "www.listescitoyennes.be"
+  ],
+  "env": {
+    "MAILCHIMP_API_KEY": "@mailchimp_api_key",
+    "MAILCHIMP_API_URL": "@mailchimp_api_url"
+  },
+  "scale": {
+    "bru1": {
+      "min": 1,
+      "max": 1
+    }
+  }
+}
