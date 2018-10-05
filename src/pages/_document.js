@@ -10,6 +10,7 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head>
+          <meta name="viewport" content="width=device-width, user-scalable=no" />
           <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css"></link>
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,900|Rubik" />
           <style>{`
@@ -19,7 +20,9 @@ export default class MyDocument extends Document {
             }
             .page {
               max-width: 960px;
-              margin: 0 auto;
+              width: 100%;
+              margin: 2rem auto;
+              padding: 0 1rem;
             }
             input, button {
               font-size: 2rem;
@@ -30,6 +33,22 @@ export default class MyDocument extends Document {
             .row {
               display: flex;
               margin: 1rem 0;
+            }
+            .home ul {
+              padding: 0;
+              margin: 0;
+            }
+            .home ul li {
+              margin: 1rem 0;
+              list-style: none;
+            }
+            .home .ui.teal.button {
+              min-width: 20rem;
+            }
+            @media (max-width: 600px) {
+              .home .ui.teal.button {
+                width: 100%;
+              }
             }
           `}</style>
         </Head>
