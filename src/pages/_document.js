@@ -34,15 +34,8 @@ export default class MyDocument extends Document {
               display: flex;
               margin: 1rem 0;
             }
-            .home ul {
-              padding: 0;
-              margin: 0;
-            }
-            .home ul li {
-              margin: 1rem 0;
-              list-style: none;
-            }
             .home .ui.teal.button {
+              margin: 0.5rem 0.5rem 0.5rem 0;
               min-width: 20rem;
             }
             @media (max-width: 600px) {

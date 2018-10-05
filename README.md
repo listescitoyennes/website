@@ -9,3 +9,19 @@ $> npm install
 $> npm run dev
 info: > Ready on http://localhost:3000
 ```
+
+## How to deploy?
+
+We are using `now` from [Zeit](http://zeit.co).
+
+Install now:
+
+```
+npm install -g now
+```
+
+deploy:
+
+```
+now
+```
