@@ -3,7 +3,7 @@
 ## How to run locally
 
 ```
-$> git clone git@github.com:xdamman/listescitoyennes.be.git listescitoyennes.be
+$> git clone git@github.com:listescitoyennes/website.git listescitoyennes.be
 $> cd listescitoyennes.be
 $> npm install
 $> npm run dev
