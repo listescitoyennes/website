@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import parties from '../../data/parties.json';
+import Head from 'next/head';
 
 class ListPage extends React.Component {
 
@@ -28,6 +29,9 @@ class ListPage extends React.Component {
         const partyInfo = parties[list.name.toLowerCase()];
         return (
           <div className="content">
+            <Head>
+              <title>Pour qui voter à {city}? A propos de la liste {list.name.toUpperCase()}...</title>
+            </Head>
             <h1>Pour qui voter à {city}?</h1>
             <h2>A propos de la liste {list.name.toUpperCase()}</h2>
             {  partyInfo && partyInfo.year_established < 2000 &&
@@ -47,7 +51,7 @@ class ListPage extends React.Component {
             </p>
 
             <p>
-              { stats.totalPoliticians ? <div>{stats.totalPoliticians} sont des politiciens connus appartenant au {Object.keys(stats.parties).join(', ')}.</div> : '' }
+              { stats.totalPoliticians ? <div>{stats.totalPoliticians} sont des politiciens appartenant au {Object.keys(stats.parties).join(', ')}.</div> : '' }
               { (stats.totalCumuls || stats.totalYearsInPolitics) ? <div>Ensemble, ils cumulent plus de {stats.totalCumuls} mandats et ont déjà passé plus de {stats.totalYearsInPolitics} années en politique.</div> : '' }
             </p>
 
@@ -66,8 +70,8 @@ class ListPage extends React.Component {
                   <td>{candidate.gender}</td>
                   <td>{candidate.firstname} {candidate.lastname}</td>
                   <td>{candidate.party}</td>
-                  { candidate.cumuls_2017 && <td><a href={candidate.cumuleo_url}>{candidate.cumuls_2017} mandats</a></td> }
-                  { candidate.politicalYears && <td><a href={candidate.cumuleo_url}>{candidate.politicalYears} années en politique</a></td> }
+                  { candidate.cumuls_2017 && <td><a href={candidate.cumuleo_url}>{candidate.cumuls_2017}</a></td> }
+                  { candidate.politicalYears && <td><a href={candidate.cumuleo_url}>{candidate.politicalYears}</a></td> }
                 </tr>
               ))}
             </table>

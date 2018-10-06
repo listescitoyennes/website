@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Head from 'next/head';
 
 class CityPage extends React.Component {
 
@@ -26,6 +27,9 @@ class CityPage extends React.Component {
         }
         return (
           <div className="content">
+            <Head>
+              <title>Pour qui voter à {city}?</title>
+            </Head>
             <style jsx>{`
                 .stats {
                   margin-bottom: 0.5rem;
@@ -41,7 +45,7 @@ class CityPage extends React.Component {
                   </h3>
                   <div className="stats">
                     <span className="col"><Link href={`/listes/${city}/${listname}`}><a>{lists[listname].candidates.length} candidats</a></Link></span>
-                    { lists[listname].totalPoliticians ? <span className="col"> – {lists[listname].totalPoliticians} sont des politiciens connus</span> : '' }
+                    { lists[listname].totalPoliticians ? <span className="col"> – {lists[listname].totalPoliticians} sont des politiciens</span> : '' }
                   </div>
                   { lists[listname].party.toLowerCase() === listname.toLowerCase() &&
                     <p>⚠️ En votant pour n'importe quel candidat de cette liste, vous votez également pour la <a href="https://fr.wikipedia.org/wiki/Particratie">particratie</a>.</p>
