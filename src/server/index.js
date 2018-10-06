@@ -48,7 +48,7 @@ nextApp.prepare().then(() => {
     obj[key] += increment;
   }
 
-  server.get('/listes/:city', async (req, res, next) => {
+  server.get('/villes/:city', async (req, res, next) => {
     const city = req.params.city.toLowerCase();
     console.log(">>> getting candidates for", city);
     const csv = await api.getJSONFromCSVFile('candidates_with_cumuleo');
@@ -81,7 +81,7 @@ nextApp.prepare().then(() => {
     next();
   });
 
-  server.get('/listes/:city/:listname', async (req, res, next) => {
+  server.get('/villes/:city/:listname', async (req, res, next) => {
     const city = req.params.city.toLowerCase();
     const listname = req.params.listname.toLowerCase();
     console.log(">>> getting candidates for", city, listname);

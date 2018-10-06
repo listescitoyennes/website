@@ -1,7 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
-import parties from '../../data/parties.json';
+import listsData from '../../data/lists.json';
 import Head from 'next/head';
+import ReactPlayer from 'react-player'
 
 class ListPage extends React.Component {
 
@@ -26,7 +27,12 @@ class ListPage extends React.Component {
                 </div>
             )
         }
-        const partyInfo = parties[list.name.toLowerCase()];
+        const listInfo = listsData[list.name.toLowerCase()];
+        let recommendation;
+        if (listInfo.program === 'process') {
+          listInfo.name = list.name;
+          recommendation = listInfo;
+        }
         return (
           <div className="content">
             <Head>
@@ -34,26 +40,40 @@ class ListPage extends React.Component {
             </Head>
             <h1>Pour qui voter à {city}?</h1>
             <h2>A propos de la liste {list.name.toUpperCase()}</h2>
-            {  partyInfo && partyInfo.year_established < 2000 &&
+            <ul className="links">
+              { listInfo.website && <li><a href={listInfo.website}>{listInfo.website}</a></li>}
+              { listInfo.facebook && <li><a href={listInfo.facebook}>Facebook Page</a></li>}
+              { listInfo.twitter && <li><a href={listInfo.twitter}>Twitter: @{listInfo.twitter.replace(/https?:\/\/(www\.)?twitter\.com\//i, '')}</a></li>}
+            </ul>
+
+            { recommendation &&
+              <div className="recommendation">
+                <div className="emoji">🎉</div>
+                <p>{list.name} est une liste citoyenne qui limite avant tout pour un nouveau processus démocratique où vous pourrez participer en tant que citoyen!</p>
+              </div>
+            }
+
+            <p>
+              { stats.totalPoliticians ? <div>Au moins {stats.totalPoliticians} sont des politiciens appartenant au {Object.keys(stats.parties).join(', ')}.</div> : '' }
+              { (stats.totalCumuls || stats.totalYearsInPolitics) ? <div>Ensemble, ils cumulent plus de {stats.totalCumuls} mandats et ont déjà passé plus de {stats.totalYearsInPolitics} années en politique.</div> : '' }
+            </p>
+
+            {  listInfo && listInfo.year_established < 2000 &&
               <div>
                 <p>
                   ⚠️ En votant pour n'importe quel candidat de cette liste, vous votez également pour la <a href="https://fr.wikipedia.org/wiki/Particratie">particratie</a>.
                 </p>
                 <p>
-                  ⚠️ Ce parti a été créé au {Math.floor(partyInfo.year_established / 100)}e siècle (<a href={partyInfo.wikipedia}>Wikipedia</a>).<br />
+                  ⚠️ Ce parti a été créé au {Math.floor(listInfo.year_established / 100)}e siècle (<a href={listInfo.wikipedia}>Wikipedia</a>).<br />
                   Êtes-vous sûr que c'est cela dont on a encore besoin pour faire face aux défis du 21e siècle?
+                </p>
+                <p>
+                  <Link href={`/villes/${city}`}><a>Voir les autres listes à {city}</a></Link>
                 </p>
               </div>
             }
             
-            <p><br />
-              <Link href={`/listes/${city}`}><a>Voir les autres listes à {city}</a></Link>
-            </p>
-
-            <p>
-              { stats.totalPoliticians ? <div>{stats.totalPoliticians} sont des politiciens appartenant au {Object.keys(stats.parties).join(', ')}.</div> : '' }
-              { (stats.totalCumuls || stats.totalYearsInPolitics) ? <div>Ensemble, ils cumulent plus de {stats.totalCumuls} mandats et ont déjà passé plus de {stats.totalYearsInPolitics} années en politique.</div> : '' }
-            </p>
+            { listInfo && listInfo.video && <ReactPlayer url={listInfo.video} /> }
 
             <table>
               <tr>
@@ -69,12 +89,15 @@ class ListPage extends React.Component {
                   <td>{candidate.position}</td>
                   <td>{candidate.gender}</td>
                   <td>{candidate.firstname} {candidate.lastname}</td>
-                  <td>{candidate.party}</td>
-                  { candidate.cumuls_2017 && <td><a href={candidate.cumuleo_url}>{candidate.cumuls_2017}</a></td> }
-                  { candidate.politicalYears && <td><a href={candidate.cumuleo_url}>{candidate.politicalYears}</a></td> }
+                  <td>{candidate.party}</td>                  
+                  { candidate.cumuls_2017 ? <td align="center"><a href={candidate.cumuleo_url}>{candidate.cumuls_2017}</a></td> : <td align="center">0</td> }
+                  { candidate.politicalYears ? <td align="center"><a href={candidate.cumuleo_url}>{candidate.politicalYears}</a></td> : <td align="center">0</td> }
                 </tr>
               ))}
             </table>
+            <p><br />
+              <Link href={`/villes/${city}`}><a>Voir les autres listes à {city}</a></Link>
+            </p>
           </div>
         )
     }

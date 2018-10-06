@@ -38,6 +38,25 @@ export default class MyDocument extends Document {
               margin: 0.5rem 0.5rem 0.5rem 0;
               min-width: 20rem;
             }
+            .ListSummmary {
+              margin: 2rem 0;
+            }
+            .recommendation {
+              margin-top: 2rem;
+              padding: 1rem;
+              color: #0c5460;
+              background-color: #d1ecf1;
+              border-color: #bee5eb;
+            }
+            .recommendation p {
+              margin-top: 2rem;
+            }
+            .emoji {
+              font-size: 64px;
+            }
+            table {
+              margin: 2rem 0;
+            }
             ul.list {
               list-style: none;
               margin: 0;

@@ -5,8 +5,8 @@ const routes = nextRoutes();
 routes
   .add('faq')
   .add('contribuer')
-  .add('city', '/listes/:city')
-  .add('list', '/listes/:city/:listname')
+  .add('city', '/villes/:city')
+  .add('list', '/villes/:city/:listname')
   .add('index', '/')
 
 export default routes;
