@@ -38,6 +38,17 @@ export default class MyDocument extends Document {
               margin: 0.5rem 0.5rem 0.5rem 0;
               min-width: 20rem;
             }
+            ul.list {
+              list-style: none;
+              margin: 0;
+              padding: 0;
+            }
+            ul.list li {
+              margin: 2rem 0;
+            }
+            h3 {
+              margin-bottom: 0.5rem;
+            }
             @media (max-width: 600px) {
               .home .ui.teal.button {
                 width: 100%;
