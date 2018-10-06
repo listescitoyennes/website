@@ -73,7 +73,9 @@ class ListPage extends React.Component {
               </div>
             }
             
-            { listInfo && listInfo.video && <ReactPlayer url={listInfo.video} /> }
+            { listInfo && listInfo.video && <div className="video">
+                <ReactPlayer url={listInfo.video} className="player" width='320' height='240' />
+              </div> }
 
             <table>
               <tr>
